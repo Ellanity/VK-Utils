@@ -5,9 +5,7 @@
 import argparse
 from vk_api.longpoll import VkLongPoll, VkEventType
 import vk_api
-#import json
 import requests
-#from datetime import datetime
 import os, time, math
 import urllib.request
 
