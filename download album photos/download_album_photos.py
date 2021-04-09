@@ -5,9 +5,9 @@
 import argparse
 from vk_api.longpoll import VkLongPoll, VkEventType
 import vk_api
-import json
+#import json
 import requests
-from datetime import datetime
+#from datetime import datetime
 import os, time, math
 import urllib.request
 
@@ -43,7 +43,7 @@ def main():
         owner_id_ = args.album.split('/')[-1].split('_')[0].replace('album', '')
         print("Owner id: " + owner_id_ + " album id: " + album_id_)
         if args.vv != False:
-            print("\nGetting album:\n")
+            print("Getting album:\n")
         
         if album_id_ != "0" and album_id_ != "00" and album_id_ != "000":
             try:
@@ -88,6 +88,7 @@ def main():
         if not os.path.exists(photo_folder):
             os.mkdir(photo_folder)
         
+        print("Start download:")
         # Let's calculate how many times you need to get a list of photos, since the number will not be an integer - we round it up
         for j in range(math.ceil(photos_count / 1000)): 
             
@@ -128,8 +129,10 @@ def main():
                     continue
         
         print('Progress: 100%\n')
+        time_for_dw = time.time() - time_now
+        print("{} successfully \n{} failed \nTime spent: {} sec.\n\n". format(photos_count-breaked, breaked, round(time_for_dw,1)))
     else:
-        print("Wrong arguments\n")
+        print("Wrong arguments\n\n")
 
 
 if __name__ == '__main__':
