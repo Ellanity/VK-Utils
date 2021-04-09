@@ -1,6 +1,6 @@
-#########################################################################################
-##  EXAMPLE python download_album_photos.py -a https://vk.com/album111_0 -t token -vv  ##
-#########################################################################################
+#####################################################################################################
+##  EXAMPLE python download_album_photos.py -a https://vk.com/album111_0 -l LOGIN -p PASSWORD -vv  ##
+#####################################################################################################
 
 import argparse
 from vk_api.longpoll import VkLongPoll, VkEventType
@@ -124,8 +124,10 @@ def main():
                     image = response.read()
                     if args.vvv != False:
                         print(image)
-                    path = str(photo_folder + "/" + file)
-                    with open (path, "wb") as file:
+                    path = str(photo_folder + "/" + str(int(counter / 100)))
+                    if not os.path.exists(path):
+                        os.mkdir(path)
+                    with open (str(path + "/" + file), "wb") as file:
                         file.write(image)
                 except Exception:
                     print('- - - Error, file skipped.')
