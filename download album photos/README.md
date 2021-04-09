@@ -14,6 +14,6 @@ If it does not work, you need to download python 3.7 or higher, download library
 ```python3 download_album_photos.py -a ALBUM_URL -p PASSWORD -l LOGIN```
 
 For more arguments:
-> python download_album_photos.py -h
-> 
 > download_album_photos.exe -h
+> 
+> python download_album_photos.py -h
