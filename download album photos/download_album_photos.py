@@ -16,7 +16,8 @@ def parseArgs():
     
     parser = argparse.ArgumentParser(description='Videos to images')
     parser.add_argument('-a', '--album', type=str, help='Album to download', required=True, default=None)
-    parser.add_argument('-t', '--token', type=str, help='Token for athorization', required=True, default=None)
+    parser.add_argument('-l', '--login', type=str, help='Login for athorization', required=True, default=None)
+    parser.add_argument('-p', '--password', type=str, help='Password for athorization', required=True, default=None)
     parser.add_argument('-v', action='store_true', help="Show some information while downloading")
     parser.add_argument('-vv', action='store_true', help="Show more information while downloading")
     parser.add_argument('-vvv', action='store_true', help="Show more than more information while downloading")
@@ -30,12 +31,15 @@ def main():
     args = parseArgs()
     matches = []
     
-    if args.album != None and args.token != None:
+    if args.album != None and args.password != None and args.login != None:
     
         session = requests.Session()
-        token = args.token
-        vk_session = vk_api.VkApi(token = token)
-        longpoll = VkLongPoll(vk_session)
+        vk_session = vk_api.VkApi(args.login, args.password)
+        try:
+            vk_session.auth(token_only=True)
+        except vk_api.AuthError as error_msg:
+            print(error_msg)
+            exit()
         vk = vk_session.get_api()
 
         # Get album info from url
