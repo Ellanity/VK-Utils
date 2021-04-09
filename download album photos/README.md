@@ -12,4 +12,5 @@ If it does not work, you need to download python 3.7 or higher and start program
 
 ```python download_album_photos.py -a ALBUM_URL -t TOKEN```
 
-> python download_album_photos.py -h for more arguments
+For more arguments:
+> python download_album_photos.py -h
