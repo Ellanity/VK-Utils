@@ -99,7 +99,7 @@ def main():
             #Getting a list of photos
             photos = vk.photos.get(owner_id=owner_id_, album_id=album_id_, count=1000, offset=j*1000)
             for photo in photos['items']:
-                counter += 1
+                
                 #Getting the address of the image with the largest number of pixels
                 biggest = photo['sizes'][0]
                 for size in photo['sizes']:
@@ -129,6 +129,7 @@ def main():
                         os.mkdir(path)
                     with open (str(path + "/" + file), "wb") as file:
                         file.write(image)
+                        counter += 1
                 except Exception:
                     print('- - - Error, file skipped.')
                     breaked += 1
