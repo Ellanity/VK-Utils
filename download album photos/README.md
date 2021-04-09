@@ -15,3 +15,5 @@ If it does not work, you need to download python 3.7 or higher, download library
 
 For more arguments:
 > python download_album_photos.py -h
+> 
+> download_album_photos.exe -h
