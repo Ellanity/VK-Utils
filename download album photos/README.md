@@ -1,19 +1,14 @@
 # Download album photos 
-Download all photos from any available for u album in vk
+Download all photos from any available for you album in vk
 
-To start just downlolad files and try to start exe from command line or terminal:
+To start just downlolad files and try to start exe:
+```download_album_photos.exe```
 
-```download_album_photos.exe -a ALBUM_URL -p PASSWORD -l LOGIN```
+If it does not work, you need to download python 3.7 or higher, download library "vk_api" and start program with python:
 
-- ALBUM_URL - it's url in vk for album
-- LOGIN - email/phone 
-- PASSWORD - password
+```python3 download_album_photos.py```
 
-If it does not work, you need to download python 3.7 or higher, download library "vk_api" and start program with next command:
-
-```python3 download_album_photos.py -a ALBUM_URL -p PASSWORD -l LOGIN```
-
-For more arguments:
+If the launch is made via the terminal, it is possible to access additional information when downloading
 > download_album_photos.exe -h
 > 
 > python download_album_photos.py -h
