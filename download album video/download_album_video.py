@@ -158,7 +158,7 @@ def main():
                     
             # Results
             time_for_dw = time.time() - time_now
-            print("{} successfully \n{} failed \nTime spent: {} sec.\n\n". format(video_count-breaked, breaked, round(time_for_dw,1)))
+            print("\n{} successfully \n{} failed \nTime spent: {} sec.\n\n". format(video_count-breaked, breaked, round(time_for_dw,1)))
             
             # More albums?
             print("Download another album? (y/n)")
