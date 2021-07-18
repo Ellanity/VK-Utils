@@ -78,6 +78,8 @@ def main():
             elif album_id_ == "000":
                 album_id_ = "saved"
 
+            photos_count = 0
+            
             if album_id_ == "profile" or album_id_ == "wall" or album_id_ == "saved":    
                 response = vk.photos.get(owner_id=owner_id_, album_id=album_id_)
                 photos_count = response['count']

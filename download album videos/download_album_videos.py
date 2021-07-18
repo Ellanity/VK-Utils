@@ -54,6 +54,7 @@ def main():
         args.album = input("Enter albums url: ")
         while args.album != None:
             
+            video_count = 0
             try:
                 # Get album info from url
                 album_id_ = str(args.album.split('/')[-1].split('=')[-1].replace('album_', ''))
