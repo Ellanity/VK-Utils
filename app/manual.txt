@@ -1,0 +1,6 @@
+> \exit : to exit
+> link  : to download album
+[The link should have right form]
+> photos : https://vk.com/album{owner_id}_{album_id}
+> videos : https://vk.com/videos{owner_id}
+>          https://vk.com/videos{owner_id}?section=album_{album_id}
