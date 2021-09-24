@@ -1,7 +1,0 @@
-vk_config.v2.json
-**/*.exe
-saved
-**/*.spec
-dist
-build
-__pycache__

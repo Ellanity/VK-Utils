@@ -1,7 +1,0 @@
-vk-api==11.8.0
-beautifulsoup4==4.9.3
-bs4==0.0.1
-lxml==4.6.3
-pytube==10.7.1
-urllib3==1.25.9
-requests==2.23.0
