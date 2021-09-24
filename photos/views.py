@@ -19,10 +19,10 @@ class PhotosAlbum:
             print("This album is not available")
 
     def get_album_owner(self):
-        return self.__user_url[20:].split('_')[0]
+        return str(self.__user_url).split('/')[-1].split('_')[0].replace('album', '')
 
     def get_album_id(self):
-        album_id = self.__user_url[20:].split('_')[1]
+        album_id = str(self.__user_url).split('/')[-1].split('_')[1]
         # Custom id's
         if album_id == "0":
             album_id = "profile"
@@ -55,9 +55,9 @@ class PhotosAlbum:
         return photos_count
 
     def create_directory_to_save(self):
-        if not os.path.exists('saved'):
-            os.mkdir('saved')
-        photo_folder = 'saved/{0}_{1}'.format(self.__album_owner, self.__album_id)
+        if not os.path.exists('saved_photos'):
+            os.mkdir('saved_photos')
+        photo_folder = 'saved_photos/{0}_{1}'.format(self.__album_owner, self.__album_id)
         if not os.path.exists(photo_folder):
             os.mkdir(photo_folder)
         return photo_folder
@@ -69,10 +69,11 @@ class PhotosAlbum:
         photo_folder = self.__photo_folder
 
         counter = 0  # of photo
-        prog = 0  # percentage of downloads
-        breaked = 0  # not downloaded due to an error
+        percentage_of_downloads = 0
+        aborted = 0  # not downloaded due to an error
         time_now = time.time()  # start time
 
+        print("Start downloading...")
         # Let's calculate how many times you need to get a list of photos,
         # since the number will not be an integer - we round it up
         for j in range(math.ceil(photos_count / 1000)):
@@ -82,7 +83,7 @@ class PhotosAlbum:
 
             for photo in photos['items']:
                 counter += 1
-                prog = round(100 / photos_count * counter, 2)
+                percentage_of_downloads = round(100 / photos_count * counter, 2)
 
                 # Getting the address of the image with the largest number of pixels
                 biggest = photo['sizes'][0]
@@ -92,18 +93,6 @@ class PhotosAlbum:
 
                 url = biggest['url']
                 file = str(os.path.split(url)[1].split('uniq_tag=')[1].split("&")[0] + ".png")
-
-                # Beautiful output
-                out = ("- - - Downloading #{} / {} Progress[").format(counter, photos_count)
-                for i in range(int(prog / 4)):
-                    out += chr(9608)
-                for i in range(25 - int(prog / 4)):
-                    out += chr(9617)
-                out += ("] {}%").format(prog)
-                if (prog < 100):
-                    print(out, end="\r")
-                else:
-                    print(out)
 
                 try:
                     response = urllib.request.urlopen(url)  # Open photo with url
@@ -123,9 +112,21 @@ class PhotosAlbum:
 
                 except ConnectionError:
                     print('- - - Error, file skipped.')
-                    breaked += 1
+                    aborted += 1
                     continue
 
-                    # Results
+                # Beautiful output
+                out = f"- - - Downloading #{counter} / {photos_count} Progress["
+                for i in range(int(percentage_of_downloads / 4)):
+                    out += chr(9608)
+                for i in range(25 - int(percentage_of_downloads / 4)):
+                    out += chr(9617)
+                out += f"] {percentage_of_downloads}%"
+                if percentage_of_downloads < 100:
+                    print(out, end="\r")
+                else:
+                    print(out)
+
+        # Results
         time_for_dw = time.time() - time_now
-        print(f"{photos_count - breaked} successfully\n{breaked} failed\nTime spent: {round(time_for_dw, 1)} sec.\n")
+        print(f"{photos_count - aborted} successfully\n{aborted} failed\nTime spent: {round(time_for_dw, 1)} sec.\n")

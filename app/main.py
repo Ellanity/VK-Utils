@@ -35,24 +35,24 @@ def main():
         manual = manual_file.read()
         print(manual)
     except FileNotFoundError:
-        print("[No manual]\n> /exit - to exit")
+        print("[No manual]\n> \\exit - to exit")
 
     # Downloading albums
     browser = AppBrowser(vk)
     while True:
-        # try:
-        user_url = input()
-        # Check if it is one of the command [one of the urls]
-        if user_url.lower() == "/exit":
-            break
-        # Check if it is web url
-        valid = validators.url(user_url)
-        if valid:
-            browser.download(user_url)
-        else:
-            print("Unknown command")
-        # except:
-        #     print("An unexpected error occurred")
+        try:
+            user_url = input()
+            # Check if it is one of the command [one of the urls]
+            if user_url.lower() == "\\exit":
+                break
+            # Check if it is web url
+            valid = validators.url(user_url)
+            if valid:
+                browser.download(user_url)
+            else:
+                print("Unknown command")
+        except Exception:
+           print("An unexpected error occurred")
     exit()
 
 

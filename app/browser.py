@@ -1,6 +1,6 @@
 # Class consist of session, url. Performs the role of a navigator between apps
 import photos.connector
-# import video.navigator
+import videos.connector
 
 
 class AppBrowser:
@@ -9,8 +9,8 @@ class AppBrowser:
         self.__session = session
         self.BROWSER = {
             "photos": photos.connector.ConnectorClass,
-            "*": AppBrowser.NotRightUrlException,
-            # "video": video.navigator.NavigatorClass
+            "videos": videos.connector.ConnectorClass,
+            "*": AppBrowser.NotRightUrlException
         }
 
     class NotRightUrlException(Exception):
@@ -24,5 +24,7 @@ class AppBrowser:
     def define_type_of_url(self, user_url):
         if user_url[:20] == "https://vk.com/album":
             return "photos"
+        if user_url[:21] == "https://vk.com/videos":
+            return "videos"
         else:
             return "*"
