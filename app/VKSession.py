@@ -13,7 +13,7 @@ class VKSessionClass:
             vk_session = vk_api.VkApi(login, password, captcha_handler=captcha_handler)
             try:
                 # Open vk session
-                vk_session.auth(token_only=True)
+                vk_session.auth(token_only=True, reauth=True)
             except vk_api.AuthError as error_msg:
                 print(error_msg)
                 exit()
